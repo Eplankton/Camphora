@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Wike Chao/code/C++/Alcion/main.cpp
+iostream
+-
+matrix.h
+C:/Users/Wike Chao/code/C++/Alcion/matrix.h
+
+C:/Users/Wike Chao/code/C++/Alcion/matrix.h
+iostream
+-
+vector
+-
+cmath
+-
+string
+-
+
