@@ -10,14 +10,10 @@ vector<double> &matrix::Init(const int init_row, const int init_column)
 {
     row = init_row;
     column = init_column;
-    module = EOF;
-    det = EOF;
-    rank = EOF;
+    rank = 0;
+    det = 0;
+    module = 0;
     body.clear();
-    for (int i = 0; i < row * column; i++)
-    {
-        body.push_back(0);
-    }
     /* body.resize(init_row);
     for (int i = 0; i < init_row; i++)
     {
@@ -31,14 +27,10 @@ vector<double> &matrix::Init(const string init_name, const int init_row, const i
     name = init_name;
     row = init_row;
     column = init_column;
-    module = EOF;
-    rank = EOF;
-    det = EOF;
+    module = 0;
+    rank = 0;
+    det = 0;
     body.clear();
-    for (int i = 0; i < row * column; i++)
-    {
-        body.push_back(0);
-    }
     return body;
 }
 
@@ -89,7 +81,7 @@ void matrix::Out(char key)
     }
     else
     {
-        cout << "\nWrong with error:-1 No value exists!\n";
+        cout << "\nWrong with error:-1 [Error]:No value exists!\n";
     }
 }
 
@@ -114,7 +106,7 @@ void matrix::Out(void)
     }
     else
     {
-        cout << "\nWrong with error:-1  No value exists!\n";
+        cout << "\nWrong with error:-1 [Error]:No value exists!\n";
     }
 }
 
@@ -279,7 +271,7 @@ matrix matrix::operator*(const matrix &second)
     {
         matrix fail;
         fail.Clear();
-        cout << "Wrong with error:-1\n";
+        cout << "Wrong with error:-1 [Error]:A<i,k> x B<k,j> = C<i,j>\n";
         return fail;
     }
 }
@@ -329,7 +321,7 @@ matrix matrix::Power(unsigned int pow)
     }
     else
     {
-        cout << "\nWrong with error:-1\n";
+        cout << "\nWrong with error:-1 [Error]:Not a cube\n";
         return *this;
     }
 }
@@ -378,10 +370,9 @@ matrix Power(const matrix Mt, unsigned int pow)
     }
     else
     {
-        cout << "\nWrong with error:-1\n";
+        cout << "\nWrong with error:-1 [Error]:Not a cube\n";
         matrix fail;
         fail.Clear();
-        cout << "Wrong with error:-1\n";
         return fail;
     }
 }
@@ -458,7 +449,7 @@ double vct::Module(void)
     }
     else
     {
-        cout << "Wrong with error:-1\n";
+        cout << "Wrong with error:-1 [Error]:Not a vector\n";
         return EOF;
     }
 }
@@ -493,7 +484,7 @@ double Angle(vct &va, vct &vb)
     }
     else
     {
-        cout << "Wrong with error:-1\n";
+        cout << "Wrong with error:-1 [Error]:Not vectors\n";
         return EOF;
     }
 }
@@ -597,7 +588,7 @@ matrix Echelon(matrix Mt)
 int Rank(matrix Mt)
 {
     int none_zero = 0;
-    Mt.rank = 0;
+    int result = 0;
     matrix TEMP = Echelon(Mt);
     for (int i = 0; i < Mt.row; i++)
     {
@@ -611,12 +602,38 @@ int Rank(matrix Mt)
         }
         if (none_zero == 1)
         {
-            Mt.rank++;
+            result++;
         }
         none_zero = 0;
     }
 
-    return Mt.rank;
+    return result;
+}
+
+int matrix::Rank(void)
+{
+
+    int none_zero = 0;
+    rank = 0;
+    matrix TEMP = Echelon(*this);
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            if (TEMP(i, j) != 0)
+            {
+                none_zero = 1;
+                break;
+            }
+        }
+        if (none_zero == 1)
+        {
+            rank++;
+        }
+        none_zero = 0;
+    }
+
+    return rank;
 }
 
 matrix Inv(matrix Mt)
@@ -668,7 +685,7 @@ matrix Inv(matrix Mt)
     {
         matrix fail;
         fail.Clear();
-        cout << "Wrong with error:-1\n";
+        cout << "Wrong with error:-1 [Error]:Not a cube\n";
         return fail;
     }
 }
@@ -724,6 +741,7 @@ double Det(matrix Mt)
     if (Mt.row == Mt.column)
     {
         double TEMP_matrix[MAXO][MAXO];
+        double result;
         for (int i = 0; i < Mt.row; i++)
         {
             for (int j = 0; j < Mt.column; j++)
@@ -732,11 +750,33 @@ double Det(matrix Mt)
             }
         }
         Mt.det = determinant(TEMP_matrix, Mt.row);
-        return Mt.det;
+        return result;
     }
     else
     {
-        cout << "Wrong with error:-1\n";
+        cout << "Wrong with error:-1 [Error]:Not a cube\n";
+        return EOF;
+    }
+}
+
+double matrix::Det(void)
+{
+    if (row == column)
+    {
+        double TEMP_matrix[MAXO][MAXO];
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < column; j++)
+            {
+                TEMP_matrix[i][j] = (*this)(i, j);
+            }
+        }
+        det = determinant(TEMP_matrix, row);
+        return det;
+    }
+    else
+    {
+        cout << "Wrong with error:-1 [Error]:Not a cube\n";
         return EOF;
     }
 }

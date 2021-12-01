@@ -10,7 +10,7 @@
 #define LIMIT 1e-005
 #define PI 3.1415926
 #define MAXO 50
-#define Init Set
+#define Set Init
 
 using namespace std;
 
@@ -33,6 +33,8 @@ public:
     void Clear(void);                                                                        //Empty the matrix into void.
     double &operator()(int row, int column);                                                 //Access to elements.
     double Module(void);                                                                     //Calculate the module of a vector.
+    int Rank(void);
+    double Det(void);
 
     matrix Power(unsigned int pow);         //Calculate the power of matrix.
     matrix Tran(void);                      //Calculate the transpose of matrix.
@@ -57,6 +59,18 @@ public:
         Ry.Init(3, 3) = {cos(theta_y), 0, -sin(theta_y), 0, 1, 0, sin(theta_y), 0, cos(theta_y)};
         Rz.Init(3, 3) = {cos(theta_z), -sin(theta_z), 0, sin(theta_z), cos(theta_z), 0, 0, 0, 1};
         this->body = (Rx * Ry * Rz).body;
+    }
+};
+
+class R_2d : public matrix
+{
+public:
+    double theta_x;
+    void Boost(double alpha)
+    {
+        row = 2, column = 2;
+        theta_x = alpha;
+        this->body = {cos(theta_x), -sin(theta_x), sin(theta_x), cos(theta_x)};
     }
 };
 
