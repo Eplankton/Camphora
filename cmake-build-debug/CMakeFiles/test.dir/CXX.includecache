@@ -6,13 +6,33 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Wike Chao/code/C++/Alcion/main.cpp
+C:/Users/Wike Chao/code/C++/Camphora/function.h
+iostream
+-
+cmath
+-
+matrix.h
+C:/Users/Wike Chao/code/C++/Camphora/matrix.h
+
+C:/Users/Wike Chao/code/C++/Camphora/main.cpp
 iostream
 -
 matrix.h
-C:/Users/Wike Chao/code/C++/Alcion/matrix.h
+C:/Users/Wike Chao/code/C++/Camphora/matrix.h
+function.h
+C:/Users/Wike Chao/code/C++/Camphora/function.h
 
-C:/Users/Wike Chao/code/C++/Alcion/matrix.h
+C:/Users/Wike Chao/code/C++/Camphora/matrix.cpp
+vector
+-
+cmath
+-
+string
+-
+matrix.h
+C:/Users/Wike Chao/code/C++/Camphora/matrix.h
+
+C:/Users/Wike Chao/code/C++/Camphora/matrix.h
 iostream
 -
 vector

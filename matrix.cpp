@@ -1,9 +1,9 @@
-#include <iostream>
 #include <vector>
 #include <cmath>
 #include <string>
 #include "matrix.h"
 
+#define LIMIT 1e-005
 using namespace std;
 
 vector<double> &matrix::Init(const int init_row, const int init_column)
@@ -62,8 +62,7 @@ void matrix::Out(char key)
                 }
                 printf("]\n");
             }
-        }
-        else
+        } else
         {
             for (int i = 0; i < row; i++)
             {
@@ -78,8 +77,7 @@ void matrix::Out(char key)
             }
         }
         cout << endl;
-    }
-    else
+    } else
     {
         cout << "\nWrong with error:-1 [Error]:No value exists!\n";
     }
@@ -103,8 +101,7 @@ void matrix::Out(void)
         }
 
         cout << endl;
-    }
-    else
+    } else
     {
         cout << "\nWrong with error:-1 [Error]:No value exists!\n";
     }
@@ -141,7 +138,8 @@ double &matrix::operator()(int i, int j)
 
 matrix matrix::operator+(const matrix &latter)
 {
-    if (this->row == latter.row && this->column == latter.column && (this->row * this->column != 0) && (latter.row * latter.column != 0))
+    if (this->row == latter.row && this->column == latter.column && (this->row * this->column != 0) &&
+        (latter.row * latter.column != 0))
     {
         matrix result;
         result.name = "(" + (this->name) + "+" + latter.name + ")";
@@ -152,8 +150,7 @@ matrix matrix::operator+(const matrix &latter)
             result.body.push_back((this->body)[i] + latter.body[i]);
         }
         return result;
-    }
-    else
+    } else
     {
         matrix fail;
         fail.Clear();
@@ -164,7 +161,8 @@ matrix matrix::operator+(const matrix &latter)
 
 matrix matrix::operator-(const matrix &latter)
 {
-    if (this->row == latter.row && this->column == latter.column && (this->row * this->column != 0) && (latter.row * latter.column != 0))
+    if (this->row == latter.row && this->column == latter.column && (this->row * this->column != 0) &&
+        (latter.row * latter.column != 0))
     {
         matrix result;
         result.name = "(" + (this->name) + "-" + latter.name + ")";
@@ -175,8 +173,7 @@ matrix matrix::operator-(const matrix &latter)
             result.body.push_back((this->body)[i] - latter.body[i]);
         }
         return result;
-    }
-    else
+    } else
     {
         matrix fail;
         fail.Clear();
@@ -198,8 +195,7 @@ vct getColumn(matrix Mt, const int c)
             a.body.push_back(Mt(m, c));
         }
         return a;
-    }
-    else
+    } else
     {
         vct fail;
         fail.Clear();
@@ -227,8 +223,7 @@ vct getRow(matrix Mt, const int r)
             a.body.push_back(Mt(r, m));
         }
         return a;
-    }
-    else
+    } else
     {
         vct fail;
         fail.Clear();
@@ -261,13 +256,13 @@ matrix matrix::operator*(const matrix &second)
             {
                 for (int c = 0; c < this->column; c++)
                 {
-                    result.body[(i)*result.column + j] += (this->body[(i) * (this->column) + c] * second.body[(c)*second.column + j]);
+                    result.body[(i) * result.column + j] += (this->body[(i) * (this->column) + c] *
+                                                             second.body[(c) * second.column + j]);
                 }
             }
         }
         return result;
-    }
-    else
+    } else
     {
         matrix fail;
         fail.Clear();
@@ -293,8 +288,7 @@ matrix matrix::Power(unsigned int pow)
             }
             result.name = "(" + temp_name + '^' + to_string(pow) + ")";
             return result;
-        }
-        else
+        } else
         {
             result.name = "(" + temp_name + '^' + to_string(pow) + ")";
             result.row = row;
@@ -307,19 +301,17 @@ matrix matrix::Power(unsigned int pow)
                 {
                     if (i == j)
                     {
-                        result.body[(i)*column + j] = 1;
-                    }
-                    else
+                        result.body[(i) * column + j] = 1;
+                    } else
                     {
-                        result.body[(i)*column + j] = 0;
+                        result.body[(i) * column + j] = 0;
                     }
                 }
             }
 
             return result;
         }
-    }
-    else
+    } else
     {
         cout << "\nWrong with error:-1 [Error]:Not a cube\n";
         return *this;
@@ -343,8 +335,7 @@ matrix Power(const matrix Mt, unsigned int pow)
             }
             result.name = "(" + temp_name + '^' + to_string(pow) + ")";
             return result;
-        }
-        else
+        } else
         {
             result.name = "(" + temp_name + '^' + to_string(pow) + ")";
             result.row = Mt.row;
@@ -357,18 +348,16 @@ matrix Power(const matrix Mt, unsigned int pow)
                 {
                     if (i == j)
                     {
-                        result.body[(i)*Mt.column + j] = 1;
-                    }
-                    else
+                        result.body[(i) * Mt.column + j] = 1;
+                    } else
                     {
-                        result.body[(i)*Mt.column + j] = 0;
+                        result.body[(i) * Mt.column + j] = 0;
                     }
                 }
             }
             return result;
         }
-    }
-    else
+    } else
     {
         cout << "\nWrong with error:-1 [Error]:Not a cube\n";
         matrix fail;
@@ -383,15 +372,14 @@ matrix matrix::operator^(const int pow)
     {
         switch (pow)
         {
-        case -1:
-            return Inv(*this);
-            break;
-        default:
-            return this->Power(pow);
-            break;
+            case -1:
+                return Inv(*this);
+                break;
+            default:
+                return this->Power(pow);
+                break;
         }
-    }
-    else
+    } else
     {
         matrix fail;
         fail.Clear();
@@ -411,7 +399,7 @@ matrix matrix::Tran(void)
     {
         for (int j = 0; j < column; j++)
         {
-            result.body[j + (i)*column] = body[i + (j)*column];
+            result.body[j + (i) * column] = body[i + (j) * column];
         }
     }
     return result;
@@ -446,8 +434,7 @@ double vct::Module(void)
         module = sqrt(sum);
         sum = 0;
         return module;
-    }
-    else
+    } else
     {
         cout << "Wrong with error:-1 [Error]:Not a vector\n";
         return EOF;
@@ -464,8 +451,7 @@ double Dot(vct &va, vct &vb)
             ans += (va.body[i]) * (vb.body[i]);
         }
         return ans;
-    }
-    else
+    } else
     {
         cout << "Wrong with error:-1\n";
         return EOF;
@@ -481,8 +467,7 @@ double Angle(vct &va, vct &vb)
         dot = Dot(va, vb);
         theta = acos(dot / mod);
         return theta;
-    }
-    else
+    } else
     {
         cout << "Wrong with error:-1 [Error]:Not vectors\n";
         return EOF;
@@ -652,8 +637,7 @@ matrix Inv(matrix Mt)
                 if ((j - i) == Mt.row)
                 {
                     TEMP.body.push_back(1);
-                }
-                else
+                } else
                 {
                     TEMP.body.push_back(0);
                 }
@@ -680,8 +664,7 @@ matrix Inv(matrix Mt)
         }
         result.name = "(" + Mt.name + "^-1" + ")";
         return result;
-    }
-    else
+    } else
     {
         matrix fail;
         fail.Clear();
@@ -717,8 +700,7 @@ double laplace_expansion(double matrix[MAXO][MAXO], int r, int c, int order)
         {
             original_i = i;
             original_j = j;
-            if (i == r || j == c)
-                ;
+            if (i == r || j == c);
             else
             {
                 if (i > r)
@@ -751,8 +733,7 @@ double Det(matrix Mt)
         }
         Mt.det = determinant(TEMP_matrix, Mt.row);
         return result;
-    }
-    else
+    } else
     {
         cout << "Wrong with error:-1 [Error]:Not a cube\n";
         return EOF;
@@ -773,8 +754,7 @@ double matrix::Det(void)
         }
         det = determinant(TEMP_matrix, row);
         return det;
-    }
-    else
+    } else
     {
         cout << "Wrong with error:-1 [Error]:Not a cube\n";
         return EOF;

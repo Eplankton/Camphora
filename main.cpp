@@ -5,7 +5,8 @@
 int main()
 {
     matrix A;
-    A.Init("A", 2, 2) = {1, 0, 0, 1};
-    A.Out();
+    A.Init("A", 3, 3) = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    Echelon(A ^ -1).Out('f');
+    cout << (A ^ -1).Rank();
     return 0;
 }

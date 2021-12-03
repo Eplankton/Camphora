@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Wike Chao/code/C++/Alcion/main.cpp" "C:/Users/Wike Chao/code/C++/Alcion/cmake-build-debug/CMakeFiles/test.dir/main.cpp.obj"
-  "C:/Users/Wike Chao/code/C++/Alcion/matrix.cpp" "C:/Users/Wike Chao/code/C++/Alcion/cmake-build-debug/CMakeFiles/test.dir/matrix.cpp.obj"
+  "C:/Users/Wike Chao/code/C++/Camphora/main.cpp" "C:/Users/Wike Chao/code/C++/Camphora/cmake-build-debug/CMakeFiles/test.dir/main.cpp.obj"
+  "C:/Users/Wike Chao/code/C++/Camphora/matrix.cpp" "C:/Users/Wike Chao/code/C++/Camphora/cmake-build-debug/CMakeFiles/test.dir/matrix.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

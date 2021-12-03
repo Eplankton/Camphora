@@ -7,7 +7,6 @@
 #include <cmath>
 #include <string>
 
-#define LIMIT 1e-005
 #define PI 3.1415926
 #define MAXO 50
 #define Set Init
